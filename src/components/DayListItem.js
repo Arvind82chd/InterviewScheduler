@@ -8,7 +8,6 @@ export default function DayListItem(props) {
   const formatSpots = (spots) => {
     if (spots === 1) {
       return `${spots} spot ` 
-      
     }
     if (spots > 1) {
       return `${spots} spots `
