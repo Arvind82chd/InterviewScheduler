@@ -15,7 +15,14 @@ import InterviewerListItem from "components/InterviewerListItem";
 
 import InterviewerList from "components/InterviewerList";
 
-import Appointment from "components/Appointment/index.js";
+import Appointment from "components/Appointment/index";
+
+import Header from "components/Appointment/Header";
+
+import Empty from "components/Appointment/Empty";
+
+import Show from "components/Appointment/Show";
+
 
 
 // Button Stories:
@@ -195,3 +202,39 @@ storiesOf("InterviewerList", module)
   })
   .add("Appointment", () => <Appointment />)
   .add("Appointment with Time", () => <Appointment time={"12pm"}/>);
+
+  // Appointment/Header Stories:
+
+  storiesOf("Appointment", module)
+  .addParameters({
+    background: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment time="12pm" />)
+  .add("Header", () => <Header time="12pm"/>);
+
+  // Appointment/Empty Stories:
+
+  storiesOf("Appointment", module)
+  .addParameters({
+    background: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Empty", () => 
+  <Empty 
+    onAdd={action("onAdd")}
+  />);
+
+// Appointment/Show Stories:
+
+storiesOf("Appointment", module)
+.addParameters({
+  background: [{ name: "white", value: "#fff", default: true }]
+})
+.add("Show", () => 
+<Show 
+  student="Lydia Miller-Jones"
+  interviewer={interviewer}
+  onEdit={action("onEdit")}
+  onDelete={action("onDelete")}
+/>);
+

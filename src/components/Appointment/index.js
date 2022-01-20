@@ -3,7 +3,7 @@ import "./styles.scss"
 
 export default function Appointment (props) {
   return (
-    <article className="appointment">Appointment at {props.time}</article>
+    <article className="appointment">Appointment: {props.time}</article>
   );
 }
 
