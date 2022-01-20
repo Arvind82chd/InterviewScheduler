@@ -23,6 +23,7 @@ import Empty from "components/Appointment/Empty";
 
 import Show from "components/Appointment/Show";
 
+import Confirm from "components/Appointment/Confirm";
 
 
 // Button Stories:
@@ -238,3 +239,16 @@ storiesOf("Appointment", module)
   onDelete={action("onDelete")}
 />);
 
+
+// Appointment/Confirm Stories:
+
+storiesOf("Appointment", module)
+.addParameters({
+  background: [{ name: "white", value: "#fff", default: true }]
+})
+.add("Confirm", () => 
+<Confirm 
+  message="Delete the appointment?"
+  onConfirm={action("onConfirm")}
+  onCancel={action("onCancel")}
+/>);
