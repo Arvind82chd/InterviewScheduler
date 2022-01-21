@@ -316,4 +316,22 @@ storiesOf("Appointment", module)
     <Appointment id={1} time="4pm" />
     <Appointment time="5pm" />
   </Fragment>
+));
+
+// Appointment/Booked Stories:
+
+storiesOf("Appointment", module)
+.addParameters({
+  background: [{ name: "white", value: "#fff", default: true }]
+})
+.add("Appointment Booked", () => (
+  <Fragment>
+    <Appointment
+      id={1}
+      time="4pm"
+      interview={{ student: "Lydia Miller-Jones", interviewer }}
+    />
+    <Appointment time="5pm" />
+  </Fragment>
 ))
+
