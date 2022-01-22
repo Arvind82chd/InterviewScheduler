@@ -4,7 +4,7 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import "./Appointment";
 import Appointment from "./Appointment";
-import getAppointmentsForDay from "helpers/selectors";
+//import getAppointmentsForDay from "helpers/selectors";
 
 
 const interviewers = [
@@ -14,24 +14,6 @@ const interviewers = [
   { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
   { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
 ];
-
-// const days = [
-//   {
-//     id: 1,
-//     name: "Monday",
-//     spots: 2,
-//   },
-//   {
-//     id: 2,
-//     name: "Tuesday",
-//     spots: 5,
-//   },
-//   {
-//     id: 3,
-//     name: "Wednesday",
-//     spots: 0,
-//   },
-// ];
 
 
 const appointments = [
@@ -75,17 +57,31 @@ const appointments = [
 
 
 
-
 export default function Application(props) {
-  const [day, setDay] = useState("Monday");
-  const [days, setDays] = useState([]);
+  // const [day, setDay] = useState("Monday");
+  // const [days, setDays] = useState([]);
+  // const [appointments, setAppointments] = useState({});
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
+  console.log("props: -----" , props);
+  
+  const setDay = day => setState({ ...state, day });
+  
+  const setDays = days => setState(prev => ({ ...prev, days }));//setState({ ...state, days})
+  
 
+  
   useEffect(() => {
     const URL = `http://localhost:8001/api/days`
     axios.get(URL).then(response => { 
+      console.log("response +++++" , response.data )
      setDays([...response.data]);
     });
-  }, [day]);
+  }, []);
+ 
   return (
     <main className="layout">
       <section className="sidebar">
@@ -97,9 +93,12 @@ export default function Application(props) {
       <hr className="sidebar__separator sidebar--centered" />
       <nav className="sidebar__menu">
         <DayList
-          days={days}
-          value={day}
-          onChange={setDay}
+         days={state.days}
+         value={state.day}
+         onChange={setDay}
+          // days={days}
+          // value={day}
+          // onChange={setDay}
         />
         {/* <DayList
           days={days}
