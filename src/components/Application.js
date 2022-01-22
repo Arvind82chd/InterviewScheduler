@@ -4,6 +4,7 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import "./Appointment";
 import Appointment from "./Appointment";
+import getAppointmentsForDay from "helpers/selectors";
 
 
 const interviewers = [
