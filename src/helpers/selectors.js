@@ -12,10 +12,10 @@ export function getInterview(state, interview) {
   if (!interview) {
     return null;
   } 
-  console.log("interview:----", interview, "state: ----", state)
+  // console.log("interview:----", interview, "state: ----", state)
   const arrayInterviewers = Object.values(state.interviewers)
   const interviewer = arrayInterviewers.find((int) =>  int.id === interview.interviewer)
-  console.log({interviewer});
+  // console.log({interviewer});
   if (!interviewer) {
     return null;
   } 
