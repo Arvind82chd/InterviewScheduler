@@ -5,12 +5,12 @@ export default function useVisualMode (initial) {
   const [history, setHistory] = useState([initial]);
   
   function transition(newMode, replace = false) {
-    if (!replace) {
+    if (replace) {
       history.push(newMode);
       setMode(newMode)
-    } else {}
+    } else setMode(newMode);
     
-    //console.log(history, 'hNm: ', newMode)
+    console.log(history, 'hNm: ', newMode)
     
   }
 
@@ -21,11 +21,12 @@ export default function useVisualMode (initial) {
       setMode(history[history.length - 2]);
       history.pop();
       setHistory(history);
-    } else if (history.length === 1) {
+    } 
+    else if (history.length === 1) {
       setMode(history[0]);
       setHistory(history);
 
-    }
+   }
 
   }
 
@@ -34,8 +35,3 @@ export default function useVisualMode (initial) {
   return { mode, transition, back };
 }
 
-// function useCustomHook() {
-//   function action() {}
-
-//   return { action };
-// }
