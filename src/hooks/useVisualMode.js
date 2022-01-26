@@ -25,13 +25,12 @@ export default function useVisualMode (initial) {
     else if (history.length === 1) {
       setMode(history[0]);
       setHistory(history);
-
    }
 
   }
 
 
-  console.log(transition);
+  //console.log(transition);
   return { mode, transition, back };
 }
 
