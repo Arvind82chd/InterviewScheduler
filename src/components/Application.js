@@ -37,6 +37,13 @@ export default function Application(props) {
       .catch((e) => console.log(e));
       return putRequest;
   }
+
+  function deleteData(id, interview) {
+    const appointment = {
+      ...state.appointments[id], interview: null
+    }
+    return axios.delete(`/api/appointments/${id}`)
+  }
 // console.log(bookInterview);
   
   // const {bookInterview} = bookInterview(props.id, props.interview);
