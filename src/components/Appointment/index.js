@@ -13,23 +13,27 @@ export default function Appointment (props) {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
+  const DELETE = "DELETE";
   const { mode, transition, back } = useVisualMode( props.interview ? SHOW : EMPTY)
   //console.log('props ----',props);
   
 
   function save(name, interviewer) {
-   // console.log("++++++++",interviewer, name)
-
     const interview = {
       student: name,
       interviewer
     };
-  
     transition(SAVING)
     props.bookInterview(props.id, interview)
     .then(() => transition(SHOW))
     .catch((e) => console.log(e));
     //transition(SHOW);
+  }
+
+  function del(id) {
+    props.delete(id)
+    .then(() => transition(EMPTY))
+    .catch((e) => console.log(e))
   }
 
   return (
@@ -53,6 +57,7 @@ export default function Appointment (props) {
       onCancel={back}
       />}
       {mode === SAVING && <Status message="SAVING"/>}
+      {mode === DELETE && <Status message="DELETING"/>}
       </article>
   );
 }
