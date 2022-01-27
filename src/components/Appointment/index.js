@@ -16,16 +16,16 @@ export default function Appointment (props) {
   
 
   function save(name, interviewer) {
-    console.log(interviewer, name)
+    console.log("++++++++",interviewer, name)
     const interview = {
       student: name,
       interviewer
     };
-    //console
+  
     props.bookInterview(props.id, interview)
+    // .then(() => transition(SHOW))
+    // .catch((e) => console.log(e));
     transition(SHOW);
-
-
   }
 
   return (
@@ -34,20 +34,19 @@ export default function Appointment (props) {
       time={props.time}
       />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} /> }
-      {mode === SHOW && (
-        <Show
+      {mode === SHOW && ( (props.interview) ?
+        <Show 
         student={props.interview.student}
         interviewer={props.interview.interviewer}
-        />
+        /> : null
       )}
       {mode === CREATE && 
       <Form 
       student={props.student}
       interviewer={props.key}
       interviewers={props.interviewers}
-      onSave={save}//(onSubmit) => save(onSubmit.target.value.student, onSubmit.target.interviewer)}
-      onCancel={() => back()}
-      //onCancel={back}
+      onSave={save}
+      onCancel={back}
       />}
       {/* {(props.interview) ? 
       <Show 
@@ -58,14 +57,3 @@ export default function Appointment (props) {
       </article>
   );
 }
-
-
-
-{/* <Fragment>
-    <Appointment
-      id={1}
-      time="4pm"
-      interview={{ student: "Lydia Miller-Jones", interviewer }}
-    />
-    <Appointment time="5pm" />
-  </Fragment> */}

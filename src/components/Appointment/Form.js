@@ -32,7 +32,7 @@ export default function Form (props) {
           type="text"
           placeholder="Enter Student Name"
           value={student}
-          onChange={(onAdd) => setStudent(onAdd.target.value)}
+          onChange={(event) => setStudent(event.target.value)}
           
           /* 
             This must be a controlled component
@@ -58,18 +58,3 @@ export default function Form (props) {
   );
 }
 
-// add("Edit Form", () => 
-//   <Form 
-//   student="A"
-//   interviewer={interviewers.id}
-//   interviewers={interviewers}
-//   onSave={action("onSave")}
-//   onCancel={action("onCancel")}
-// />)
-
-
-// .add("Create Form", () => 
-//   <Form 
-//   interviewers={interviewers}
-//   onSave={action("onSave")}
-//   onCancel={action("onCancel")}
