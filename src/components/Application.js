@@ -25,6 +25,17 @@ export default function Application(props) {
     };
     setState({...state, appointments});
     console.log(id, interview);
+
+    const putRequest = axios.put(`/api/appointments/${appointment.id}`, {interview})
+    .then(response => {
+      setState({
+        ...state,
+        appointments
+      });
+        return response;
+      })
+      .catch((e) => console.log(e));
+      return putRequest;
   }
 // console.log(bookInterview);
   

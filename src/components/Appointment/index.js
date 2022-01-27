@@ -23,9 +23,9 @@ export default function Appointment (props) {
     };
   
     props.bookInterview(props.id, interview)
-    // .then(() => transition(SHOW))
-    // .catch((e) => console.log(e));
-    transition(SHOW);
+    .then(() => transition(SHOW))
+    .catch((e) => console.log(e));
+    //transition(SHOW);
   }
 
   return (
@@ -34,11 +34,11 @@ export default function Appointment (props) {
       time={props.time}
       />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} /> }
-      {mode === SHOW && ( (props.interview) ?
+      {mode === SHOW && (
         <Show 
         student={props.interview.student}
         interviewer={props.interview.interviewer}
-        /> : null
+        /> 
       )}
       {mode === CREATE && 
       <Form 
