@@ -43,7 +43,7 @@ export default function Application(props) {
     setState({...state, appointments});
    // console.log(id, interview);
 
-    const putRequest = axios.put(`http://localhost:8001/api/appointments/${appointment.id}`, {interview})
+    const putRequest = axios.put(`/api/appointments/${appointment.id}`, {interview})
     .then(response => {
       setState({
         ...state,
@@ -94,6 +94,7 @@ export default function Application(props) {
       bookInterview={bookInterview}
       interviewers={interviewers}
       delete={cancelInterview}
+      //confirm={}
       //{...appointment}
       />
       );

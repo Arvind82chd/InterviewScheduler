@@ -6,6 +6,7 @@ import Empty from './Empty';
 import Form from './Form';
 import useVisualMode from 'hooks/useVisualMode';
 import Status from './Status';
+import Confirm from './Confirm';
 
 export default function Appointment (props) {
   
@@ -14,6 +15,7 @@ export default function Appointment (props) {
   const CREATE = "CREATE";
   const SAVING = "SAVING";
   const DELETE = "DELETE";
+  const CONFIRM = "CONFIRM";
   const { mode, transition, back } = useVisualMode( props.interview ? SHOW : EMPTY)
   //console.log('props ----',props);
   
@@ -39,6 +41,13 @@ export default function Appointment (props) {
     .then(() => transition(EMPTY))
     .catch((e) => console.log(e))
   }
+  
+   function confirm(id) {
+    transition(CONFIRM)
+    if (props.onConfirm) {
+      del(id)
+    } else transition(SHOW);
+   }
 
   return (
     <article className="appointment">
@@ -51,6 +60,7 @@ export default function Appointment (props) {
         student={props.interview.student}
         interviewer={props.interview.interviewer}
         onDelete={del}
+        onConfirm={confirm}
         /> 
       )}
       {mode === CREATE && 
@@ -63,6 +73,7 @@ export default function Appointment (props) {
       />}
       {mode === SAVING && <Status message="SAVING"/>}
       {mode === DELETE && <Status message="DELETING"/>}
+      {mode === CONFIRM && <Confirm onConfirm={confirm}/>}
       </article>
   );
 }
