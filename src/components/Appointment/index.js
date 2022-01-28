@@ -31,6 +31,10 @@ export default function Appointment (props) {
   }
 
   function del(id) {
+    // const interview = {
+
+    // }
+    transition(DELETE)
     props.delete(id)
     .then(() => transition(EMPTY))
     .catch((e) => console.log(e))
@@ -46,6 +50,7 @@ export default function Appointment (props) {
         <Show 
         student={props.interview.student}
         interviewer={props.interview.interviewer}
+        onDelete={del}
         /> 
       )}
       {mode === CREATE && 

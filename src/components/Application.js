@@ -15,6 +15,23 @@ export default function Application(props) {
     interviewers: {}
   });
   
+  
+  useEffect(() => {
+  Promise.all([
+    axios.get(`http://localhost:8001/api/days`),
+    axios.get(`http://localhost:8001/api/appointments`),
+    axios.get(`http://localhost:8001/api/interviewers`)
+  ]).then(response => {
+    setState(prev => ({ ...prev, 
+      days: response[0].data,
+      appointments: response[1].data,
+      interviewers: response[2].data,
+      
+    }))
+    
+  });
+  }, []);
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id], interview: { ...interview}
@@ -26,7 +43,7 @@ export default function Application(props) {
     setState({...state, appointments});
    // console.log(id, interview);
 
-    const putRequest = axios.put(`/api/appointments/${appointment.id}`, {interview})
+    const putRequest = axios.put(`http://localhost:8001/api/appointments/${appointment.id}`, {interview})
     .then(response => {
       setState({
         ...state,
@@ -38,7 +55,7 @@ export default function Application(props) {
       return putRequest;
   }
 
-  function cancelInterview(id) {
+  function cancelInterview(id, interview) {
     const appointment = {
       ...state.appointments[id], interview: null
     }
@@ -47,7 +64,16 @@ export default function Application(props) {
       [id]: appointment
     }
     setState({...state, appointments})
-    return axios.delete(`/api/appointments/${id}`)
+    const deleteRequest = axios.delete(`http:localhost:8001/api/appointments/${appointment.id}`, {interview})
+    .then(response => {
+      setState({
+        ...state,
+        appointments
+      });
+      return response;
+    })
+    .catch((e) => console.log(e));
+    return deleteRequest;
   }
 
 
@@ -76,21 +102,6 @@ export default function Application(props) {
 
   const setDay = day => setState({ ...state, day });
   
-  useEffect(() => {
-  Promise.all([
-    axios.get(`http://localhost:8001/api/days`),
-    axios.get(`http://localhost:8001/api/appointments`),
-    axios.get(`http://localhost:8001/api/interviewers`)
-  ]).then(response => {
-    setState(prev => ({ ...prev, 
-      days: response[0].data,
-      appointments: response[1].data,
-      interviewers: response[2].data,
-      
-    }))
-    
-  });
-}, []);
 console.log("state.interv: ",state.interviewers);
 
  
