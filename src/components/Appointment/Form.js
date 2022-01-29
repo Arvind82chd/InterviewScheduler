@@ -30,13 +30,13 @@ export default function Form (props) {
           name="name"
           type="text"
           placeholder="Enter Student Name"
-          value={student}
+          value={student} ///???????
           onChange={(event) => setStudent(event.target.value)}
         />
       </form>
       <InterviewerList 
         value={interviewer}
-        // interviewer={props.interviewer}
+        setInterviewer={props.interviewer}
         interviewers={props.interviewers}
         onChange={setInterviewer}
         /* your code goes here */
