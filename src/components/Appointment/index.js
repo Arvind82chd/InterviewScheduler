@@ -32,21 +32,17 @@ export default function Appointment (props) {
     //transition(SHOW);
   }
 
-  function del(id) {
-    // const interview = {
-
-    // }
+  function del() {
+    //console.log(props.id)
     transition(DELETE)
-    props.delete(id)
+    //console.log(props.delete(props.id))
+    props.delete(props.id)
     .then(() => transition(EMPTY))
     .catch((e) => console.log(e))
   }
   
-   function confirm(id) {
+   function confirm() {
     transition(CONFIRM)
-    if (props.onConfirm) {
-      del(id)
-    } else transition(SHOW);
    }
 
   return (
@@ -59,8 +55,8 @@ export default function Appointment (props) {
         <Show 
         student={props.interview.student}
         interviewer={props.interview.interviewer}
-        onDelete={del}
-        onConfirm={confirm}
+        onDelete={confirm}
+        onConfirm={del}
         /> 
       )}
       {mode === CREATE && 
@@ -73,7 +69,7 @@ export default function Appointment (props) {
       />}
       {mode === SAVING && <Status message="SAVING"/>}
       {mode === DELETE && <Status message="DELETING"/>}
-      {mode === CONFIRM && <Confirm onConfirm={confirm}/>}
+      {mode === CONFIRM && <Confirm onConfirm={del} onCancel={back} message="Are you sure of deleting this?"/>}
       </article>
   );
 }
