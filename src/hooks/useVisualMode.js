@@ -10,19 +10,19 @@ export default function useVisualMode (initial) {
      // setMode(prev => [...prev, newMode])
       setMode(newMode)
     } else setMode(newMode);
-    console.log('history---> ',history, 'hNm: ', newMode)
+   // console.log('history---> ',history, 'hNm: ', newMode)
   }
 
   function back() {
     //console.log('history b1---> ',history, 'hNm: ', newMode)
     setMode(initial);
-    console.log('history b2---> ',history)
+    //console.log('history b2---> ',history)
     //setMode(prevMode => prevMode )
     if(history.length >= 1) {
       setMode(history[history.length - 2]);
       history.pop();
       setHistory(history);
-      console.log('history b3---> ',history)
+     // console.log('history b3---> ',history)
     } 
   //   else if (history.length === 1) {
   //     setMode(history[0]);
