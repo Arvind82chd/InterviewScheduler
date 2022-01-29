@@ -51,7 +51,7 @@ export default function Application(props) {
       });
         return response;
       })
-      .catch((e) => console.log(e));
+     // .catch((e) => console.log(e));
       return putRequest;
   }
 
@@ -63,9 +63,11 @@ export default function Application(props) {
       ...state.appointments, 
       [id]: appointment
     }
-    setState({...state, appointments})
+    //setState({...state, appointments})
     
     return axios.delete(`/api/appointments/${id}`)
+    .then(() => {setState({...state, appointments})})
+    //.catch((e) => console.log(e))
   }
 
 
