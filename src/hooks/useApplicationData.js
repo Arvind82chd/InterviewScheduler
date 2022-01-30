@@ -41,10 +41,7 @@ export default function useApplicationData() {
     //     return day.spots -= 1;
 
     // }
-    // check which multiple of five is id
-    // based on that identify the day
-    // increment by 1 if bookInterview
-    // decrement by 1 if cancelInterview
+   
 
     function updateSpots (actionType) {
       const days = state.days.map(day => {

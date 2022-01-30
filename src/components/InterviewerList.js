@@ -1,9 +1,21 @@
 import React from 'react';
 import "./InterviewerList.scss";
 import InterviewerListItem from './InterviewerListItem';
+import PropTypes from 'prop-types';
 
+// class Greeting extends React.Component {
+//   render() {
+//     return (
+//       <h1>Hello, {this.props.name}</h1>
+//     );
+//   }
+// }
 
-export default function InterviewerList (props) {
+// Greeting.propTypes = {
+//   name: PropTypes.string
+// };
+
+function InterviewerList (props) {
 
   //const {interviewers, setInterviewer} = props;
 
@@ -51,3 +63,9 @@ export default function InterviewerList (props) {
 // </select>
 
 // <p id="interviewer-output">The currently selected interviewer is:</p>
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
+};
+
+export default InterviewerList;
