@@ -69,7 +69,7 @@ export default function useApplicationData() {
         ...state.appointments,
         [id]: appointment
       };
-      setState({...state, appointments});
+     // setState({...state, appointments});
     //   console.log('id & interview ----',id, interview);
     //  console.log('apps----',appointment.id)
       const putRequest = axios.put(`/api/appointments/${appointment.id}`, {interview})
