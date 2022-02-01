@@ -23,7 +23,6 @@ export default function Appointment (props) {
   const ERROR_DELETE = "ERROR_DELETE";
 
   const { mode, transition, back } = useVisualMode( props.interview ? SHOW : EMPTY)
-  //console.log('props ----',props);
   
 
   function save(name, interviewer) {
@@ -34,17 +33,14 @@ export default function Appointment (props) {
     transition(SAVING)
     props.bookInterview(props.id, interview)
     .then(() => transition(SHOW))
-    .catch((e) => transition(ERROR_SAVE, true))//console.log(e));
-    //transition(SHOW);
+    .catch((e) => transition(ERROR_SAVE, true))
   }
 
   function del() {
-    //console.log(props.id)
     transition(DELETE)
-    //console.log(props.delete(props.id))
     props.delete(props.id)
     .then(() => transition(EMPTY))
-    .catch((e) => transition(ERROR_DELETE, true)) //console.log(e))
+    .catch((e) => transition(ERROR_DELETE, true)) 
   }
   
    function confirm() {
@@ -53,7 +49,6 @@ export default function Appointment (props) {
 
    function edit() {
      transition(EDIT, true)
-    // console.log('---->',props.interview.interviewer)
    }
   return (
     <article className="appointment">
@@ -66,7 +61,6 @@ export default function Appointment (props) {
         student={props.interview.student}
         interviewer={props.interview.interviewer}
         onDelete={confirm}
-        //onConfirm={del}
         onEdit={edit}
         /> 
       )}
@@ -82,13 +76,14 @@ export default function Appointment (props) {
       {mode === DELETE && <Status message="DELETING"/>}
       {mode === CONFIRM && <Confirm onConfirm={del} onCancel={back} message="Are you sure of deleting this?"/>}
       {mode === EDIT && <Form 
-      student={props.interview.student}//{props.student}
+      student={props.interview.student}
       interviewer={props.interview.interviewer.id}
       interviewers={props.interviewers}
       onSave={save}
       onCancel={back}
       />}
-      {mode === ERROR_SAVE && <Error message="Not Saved" onClose={back}/>}
+      {mode === ERROR_SAVE && <Error message="Not Saved" onClose={back}
+      />}
       {mode === ERROR_DELETE && <Error message="Not Deleted" onClose={back}/>}
       </article>
   );

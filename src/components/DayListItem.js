@@ -5,7 +5,6 @@ import './DayListItem.scss';
 
 export default function DayListItem(props) {
   const spots = props.spots;
-  console.log("spots ----",spots)
   const formatSpots = (spots) => {
     if (spots === 1) {
       return `${spots} spot ` 
@@ -20,7 +19,7 @@ export default function DayListItem(props) {
   
 
   return (
-    <li className={dayClass} onClick={() => props.setDay(props.name)} selected={props.selected} >
+    <li className={dayClass} onClick={() => props.setDay(props.name)} selected={props.selected} data-testid="day">
       <h2 className="test--regular">{props.name}</h2>
       <h3 className="text--light">{formatSpots(spots)}remaining</h3>
 

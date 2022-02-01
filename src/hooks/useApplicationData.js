@@ -30,19 +30,6 @@ export default function useApplicationData() {
     });
     }, []);
 
-    // function calculateSpots(id, days, add = true) {
-    //   //const dayId = null
-    //   const dayId = Math.floor(id / 5)
-    //   console.log(dayId)
-    //   const day = days[dayId - 1]
-    //   if (add) {
-    //     return day.spots += 1;
-    //   } 
-    //     return day.spots -= 1;
-
-    // }
-   
-
     function updateSpots (actionType) {
       const days = state.days.map(day => {
         if (day.name === state.day) {
@@ -60,29 +47,22 @@ export default function useApplicationData() {
       const appointment = {
         ...state.appointments[id], interview: { ...interview}, 
       };
-      // const spots = {
-      //   ...state.days,
-      //   spots: calculateSpots(id, state.days)
-      // }
-      
+   
       const appointments = {
         ...state.appointments,
         [id]: appointment
       };
-     // setState({...state, appointments});
-    //   console.log('id & interview ----',id, interview);
-    //  console.log('apps----',appointment.id)
+    
       const putRequest = axios.put(`/api/appointments/${appointment.id}`, {interview})
       .then(response => {
         const days = updateSpots("bookAppointment")
         setState({
           ...state,
           appointments, 
-          days //spots
+          days 
         });
           return response;
         })
-       // .catch((e) => console.log(e));
         return putRequest;
     }
 
@@ -96,30 +76,20 @@ export default function useApplicationData() {
         ...state.appointments, 
         [id]: appointment
       }
-      // const spots = {
-      //   ...state.days,
-      //   spots: calculateSpots(id, state.days, false)
-      // }
-      
-      //setState({...state, appointments})
+  
       const deleteRequest = axios.delete(`/api/appointments/${id}`)
       .then(response => {
         const days = updateSpots()
         setState({...state, 
           appointments, 
-          days //spots
+          days 
         });
         return response;
     })
-      //.catch((e) => console.log(e))
       return deleteRequest;
     }
-
-
   return {
     state, setDay, bookInterview, cancelInterview
   };
-
-
 }
 

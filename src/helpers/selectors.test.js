@@ -102,9 +102,6 @@ test("getInterviewersForDay returns an array", () => {
 
 test("getInterviewersForDay returns an array with a length matching the number of Interviewers for that day", () => {
   const result = getInterviewersForDay(state, "Monday");
-  console.log("legnth: ----",result.length)
-  console.log("state: ----",state)
-  console.log("getInterv: ----",getInterviewersForDay(state, "Monday"));
   expect(result.length).toEqual(1);
 });
 

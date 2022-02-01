@@ -97,14 +97,6 @@ storiesOf("Button", module)
     ))
     .add("Wednesday", () => (
       <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
-    // .add("Monday", () => (
-    //   <DayList days={days} day={"Monday"} setDay={action("setDay")} />
-    // ))
-    // .add("Tuesday", () => (
-    //   <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
-    // ))
-    // .add("Wednesday", () => (
-    //     <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
     ));
 
 
@@ -176,30 +168,6 @@ storiesOf("InterviewerList", module)
       onChange={action("setInterviewer")}
     />
   ));
-
-  // .add("Initial", () => (
-  //   <InterviewerList
-  //     interviewers={interviewers}
-  //   />
-  // ))
-  // .add("Selected", () => (
-  //   <InterviewerList
-  //     interviewers={interviewers}
-  //     interviewer={3}
-  //   />
-  // ))
-  // .add("Clickable", () => (
-  //   // <InterviewerList
-  //   //   interviewers={interviewers}
-  //   //   setInterviewer={action("setInterviewer")}
-  //   // />
-  //   <InterviewerListItem
-  //   name={interviewer.name}
-  //   avatar={interviewer.avatar}
-  //   setInterviewer={() => action("setInterviewer")(interviewer.id)}
-  // />
-  // ));
-
 
   // Appointment/index Stories:
 
