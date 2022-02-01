@@ -39,3 +39,8 @@ npm run storybook
 * A user is shown a status indicator while asynchronous operations are in progress.
 * When the user presses the close button of the error they are returned to the Form or Show view (skipping Status and Confirm).
 * The application makes API requests to load and persist data. We do not lose data after a browser refresh.
+
+!["Main View 1"](https://github.com/Arvind82chd/InterviewScheduler/blob/master/docs/View-1.png?raw=true)
+!["Main View 2"](https://github.com/Arvind82chd/InterviewScheduler/blob/master/docs/View-2.png?raw=true)
+!["Form"](https://github.com/Arvind82chd/InterviewScheduler/blob/master/docs/Form.png?raw=true)
+!["Confirm"](https://github.com/Arvind82chd/InterviewScheduler/blob/master/docs/Confirm.png?raw=true)
