@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./styles.scss"
 import Header from './Header';
 import Show from './Show';
@@ -23,7 +23,7 @@ export default function Appointment (props) {
   const ERROR_DELETE = "ERROR_DELETE";
 
   const { mode, transition, back } = useVisualMode( props.interview ? SHOW : EMPTY)
-  
+  const [ actionType, setActionType ] = useState('');
 
   function save(name, interviewer) {
     const interview = {
@@ -31,43 +31,56 @@ export default function Appointment (props) {
       interviewer
     };
     transition(SAVING)
-    props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview, actionType) 
     .then(() => transition(SHOW))
     .catch((e) => transition(ERROR_SAVE, true))
   }
 
   function del() {
-    transition(DELETE)
-    props.delete(props.id)
+    transition(DELETE, true)
+    
+    props.delete(props.id, actionType)
     .then(() => transition(EMPTY))
     .catch((e) => transition(ERROR_DELETE, true)) 
   }
   
    function confirm() {
-    transition(CONFIRM, true)
+    transition(CONFIRM)
    }
 
    function edit() {
-     transition(EDIT, true)
+    setActionType('EDIT_APPOINTMENT') 
+    transition(EDIT)
+     
    }
+
+   function add() {
+     setActionType('NEW_APPOINTMENT')
+    transition(CREATE)
+   }
+
+   function handleDelete () {
+    setActionType('DELETE_APPOINTMENT')
+    confirm()
+   }
+
   return (
     <article className="appointment">
       <Header 
       time={props.time}
       />
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE, true)} /> }
+      {mode === EMPTY && <Empty onAdd={add} /> }
       {mode === SHOW && (
         <Show 
         student={props.interview.student}
         interviewer={props.interview.interviewer}
-        onDelete={confirm}
+        onDelete={handleDelete}
         onEdit={edit}
         /> 
       )}
       {mode === CREATE && 
       <Form 
       student={props.student}
-      interviewer={props.key}
       interviewers={props.interviewers}
       onSave={save}
       onCancel={back}

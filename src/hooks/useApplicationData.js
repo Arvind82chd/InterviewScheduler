@@ -33,17 +33,22 @@ export default function useApplicationData() {
     function updateSpots (actionType) {
       const days = state.days.map(day => {
         if (day.name === state.day) {
-          if (actionType === "bookAppointment") {
+          console.log(actionType)
+
+          if (actionType === "NEW_APPOINTMENT") {
             return { ...day, spots: day.spots - 1 }
           } 
+          else if (actionType === "DELETE_APPOINTMENT") {
             return { ...day, spots: day.spots + 1 }
+          }
           
-        } else return { ...day };
+        } 
+          return { ...day };
       })
       return days;
     }
 
-    function bookInterview(id, interview) {
+    function bookInterview(id, interview, actionType) {
       const appointment = {
         ...state.appointments[id], interview: { ...interview}, 
       };
@@ -55,7 +60,7 @@ export default function useApplicationData() {
     
       const putRequest = axios.put(`/api/appointments/${appointment.id}`, {interview})
       .then(response => {
-        const days = updateSpots("bookAppointment")
+        const days = updateSpots(actionType)
         setState({
           ...state,
           appointments, 
@@ -67,7 +72,7 @@ export default function useApplicationData() {
     }
 
 
-    function cancelInterview(id) {
+    function cancelInterview(id, actionType) {
       const appointment = {
         ...state.appointments[id], interview: null
       }
@@ -79,7 +84,7 @@ export default function useApplicationData() {
   
       const deleteRequest = axios.delete(`/api/appointments/${id}`)
       .then(response => {
-        const days = updateSpots()
+        const days = updateSpots(actionType)
         setState({...state, 
           appointments, 
           days 
